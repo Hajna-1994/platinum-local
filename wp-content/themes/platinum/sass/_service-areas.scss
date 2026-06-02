@@ -1,0 +1,164 @@
+.service-areas-section {
+  background-color: $color-white;
+  position: relative;
+  overflow: hidden;
+  
+  .areas-heading {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: $color-dark-blue;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 30px;
+    }
+  }
+  
+  .areas-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgba($color-black, 0.05);
+    padding-bottom: 20px;
+  }
+  
+  .area-tab-btn {
+    font-family: $font-secondary;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: $border-radius-pill;
+    background-color: $color-light-bg;
+    color: $color-text-muted;
+    transition: $transition-default;
+    
+    &:hover {
+      background-color: rgba($color-primary, 0.05);
+      color: $color-primary;
+    }
+    
+    &.active {
+      background-color: $color-primary;
+      color: $color-white;
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  .areas-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    align-items: center;
+    
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  
+  .areas-details {
+    padding-right: 30px;
+    
+    @media (max-width: $breakpoint-desktop) {
+      padding-right: 0;
+    }
+  }
+  
+  .city-name {
+    font-size: 36px;
+    font-weight: 800;
+    color: $color-dark-blue;
+    margin-bottom: 20px;
+  }
+  
+  .city-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: $color-text-muted;
+    margin-bottom: 30px;
+  }
+  
+  .suburbs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 20px;
+    
+    .suburb-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: $color-text-dark;
+      font-weight: 500;
+      
+      &::before {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: $color-primary;
+        border-radius: 50%;
+      }
+    }
+  }
+  
+  // Interactive SVG Map styling
+  .map-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    svg {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+    }
+    
+    // States styling
+    .map-state {
+      fill: #E2E8F0;
+      stroke: $color-white;
+      stroke-width: 1.5px;
+      transition: fill 0.3s ease;
+      cursor: pointer;
+      
+      &:hover {
+        fill: rgba($color-primary, 0.15);
+      }
+      
+      &.active {
+        fill: url(#map-gradient);
+        filter: drop-shadow(0 10px 20px rgba($color-primary, 0.2));
+      }
+    }
+    
+    // City markers
+    .map-marker {
+      fill: $color-white;
+      stroke: $color-primary;
+      stroke-width: 3px;
+      r: 6;
+      cursor: pointer;
+      transition: $transition-default;
+      
+      &:hover, &.active {
+        fill: $color-cyan;
+        stroke: $color-dark-blue;
+        r: 8;
+        filter: drop-shadow(0 0 8px $color-cyan);
+      }
+    }
+  }
+}
+
+// SVG linear gradient helper
+#map-gradient {
+  --stop-color-1: #0052FF;
+  --stop-color-2: #00D8FF;
+}

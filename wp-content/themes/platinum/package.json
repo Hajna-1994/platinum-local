@@ -1,0 +1,13 @@
+{
+  "name": "platinum",
+  "version": "1.1.0",
+  "description": "IT support and tech repair platform WordPress theme",
+  "main": "index.php",
+  "scripts": {
+    "watch": "sass --watch sass/main.scss:css/main.css",
+    "build": "sass sass/main.scss:css/main.css --style compressed"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

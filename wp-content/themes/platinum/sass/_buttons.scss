@@ -1,0 +1,129 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-family: $font-secondary;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: $border-radius-pill;
+  transition: $transition-default;
+  cursor: pointer;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &-primary {
+    background: linear-gradient(90deg, #0052FF 0%, #00C2FF 100%);
+    color: $color-white;
+    border: none;
+    box-shadow: 0 8px 24px rgba(0, 82, 255, 0.3);
+
+    &:hover {
+      background: linear-gradient(90deg, #0046D5 0%, #00B2E6 100%);
+      box-shadow: 0 12px 30px rgba(0, 82, 255, 0.4);
+    }
+  }
+
+  &-view-plan {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: $color-white;
+    border: 1px solid #0052FF;
+    border-radius: 4px;
+    box-shadow: none;
+
+    &:hover {
+      background-color: rgba(0, 82, 255, 0.1);
+      border-color: #00D8FF;
+      color: $color-white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 82, 255, 0.2);
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  // Dark background button states
+  &-light-outline {
+    background-color: transparent;
+    color: $color-white;
+    border: 2px solid rgba($color-white, 0.3);
+
+    &:hover {
+      background-color: $color-white;
+      color: $color-dark-blue;
+      border-color: $color-white;
+    }
+  }
+
+  // Figma ghost CTA on dark hero
+  &-ghost {
+    background: transparent;
+    color: $color-white;
+    border: 1px solid rgba(#60a5fa, 0.9);
+    border-radius: 2px;
+    box-shadow: none;
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: #38bdf8;
+      background: rgba(59, 130, 246, 0.08);
+      color: $color-white;
+    }
+  }
+  
+  &-secondary {
+    background-color: $color-cyan;
+    color: $color-dark-blue;
+    border: 2px solid $color-cyan;
+    
+    &:hover {
+      background-color: darken($color-cyan, 10%);
+      border-color: darken($color-cyan, 10%);
+    }
+  }
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-secondary;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-text-dark;
+  letter-spacing: 1px;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 4px;
+  
+  svg {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover {
+    color: $color-primary;
+    
+    svg {
+      transform: translateX(4px);
+    }
+  }
+}

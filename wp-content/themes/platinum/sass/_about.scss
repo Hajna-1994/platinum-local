@@ -1,0 +1,107 @@
+.about-section {
+  background-color: $color-white;
+  overflow: hidden;
+  
+  .grid-2 {
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .about-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-right: 30px;
+    
+    @media (max-width: $breakpoint-tablet) {
+      padding-right: 0;
+      margin-bottom: 40px;
+    }
+  }
+  
+  .about-watermark {
+    font-family: $font-secondary;
+    font-size: 80px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba($color-dark-blue, 0.05);
+    line-height: 1;
+    margin-bottom: -15px;
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 50px;
+    }
+  }
+  
+  .about-main-image-wrapper {
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-lg;
+    
+    img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      transition: $transition-default;
+      
+      @media (max-width: $breakpoint-tablet) {
+        height: 280px;
+      }
+    }
+    
+    &:hover img {
+      transform: scale(1.02);
+    }
+  }
+  
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .about-heading {
+    font-size: 40px;
+    font-weight: 800;
+    color: $color-dark-blue;
+    line-height: 1.15;
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 30px;
+    }
+    
+    span {
+      font-weight: 300;
+      color: rgba($color-dark-blue, 0.4);
+    }
+  }
+  
+  .about-pill-image-wrapper {
+    width: 180px;
+    height: 70px;
+    border-radius: $border-radius-pill;
+    overflow: hidden;
+    box-shadow: $shadow-md;
+    border: 3px solid $color-white;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .about-description-1 {
+    font-size: 16px;
+    color: $color-text-muted;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  
+  .about-description-2 {
+    font-size: 15px;
+    color: rgba($color-text-muted, 0.8);
+    line-height: 1.6;
+  }
+}

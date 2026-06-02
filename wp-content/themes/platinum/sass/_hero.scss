@@ -1,0 +1,93 @@
+// Homepage hero — header + banner (Figma)
+
+.hero {
+  position: relative;
+  //min-height: 100vh;
+  background-color: $color-dark-deep;
+  background-image:
+    radial-gradient(ellipse at 25% 35%, rgba($color-primary, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba($color-cyan, 0.06) 0%, transparent 45%);
+  color: $color-white;
+  overflow: hidden;
+  padding: 0;
+
+  .hero-top {
+    position: relative;
+    z-index: 2;
+    //min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-content {
+    flex: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    // align-content: center;
+     padding-top: clamp(32px, 6vw, 100px);
+     padding-bottom: clamp(48px, 8vw, 92px);
+    // min-height: calc(100vh - 100px);
+  }
+
+  .hero-layout {
+    .hero-left{
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  .hero-title {
+    margin: 0 0 40px;
+    font-family: $font-primary;
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: $color-white;
+  }
+
+  .hero-title-line {
+    display: block;
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 45%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .hero-aside {
+    justify-self: end;
+    align-self: end;
+    max-width: 425px;
+    text-align: right;
+
+    @media (max-width: $breakpoint-tablet) {
+      justify-self: start;
+      text-align: left;
+      margin-top: 48px;
+      max-width: 100%;
+    }
+  }
+
+  .hero-sub {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba($color-white, 0.6);
+  }
+}
+
+// Legacy alias used elsewhere
+.hero-section {
+  @extend .hero;
+}

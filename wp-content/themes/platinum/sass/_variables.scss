@@ -1,0 +1,43 @@
+// Typography Fonts
+$font-primary: 'Archivo', sans-serif;
+$font-secondary: 'Outfit', sans-serif;
+
+// Colors
+$color-primary: #0052FF;        // Vibrant Brand Blue
+$color-primary-dark: #003ECC;   // Darker shade for hovers
+$color-cyan: #00D8FF;          // Cyan/Electric Blue for highlights
+$color-dark-blue: #0A1128;     // Rich Dark Navy Background
+$color-dark-deep: #050918;     // Deeper Navy
+$color-dark-light: #161F38;    // Lighter shade of navy for cards/borders
+$color-light-bg: #F5F7FA;      // Light Gray Background for Sections
+$color-white: #FFFFFF;
+$color-black: #000000;
+
+// Text Colors
+$color-text-dark: #0A1128;
+$color-text-muted: #5C677D;
+$color-text-light: #E2E8F0;
+$color-text-white: #FFFFFF;
+
+// Grid & Layout
+$container-max-width: 1240px;
+$container-padding: 20px;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1200px;
+
+// Transitions & Radius
+$transition-default: all 0.3s ease;
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+$border-radius-pill: 9999px;
+
+// Shadow Styles
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+$shadow-premium: 0 20px 40px rgba(0, 82, 255, 0.08);

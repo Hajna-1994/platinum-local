@@ -1,0 +1,153 @@
+.subscription-section {
+  background-color: $color-dark-deep;
+  background-image: radial-gradient(circle at 10% 30%, rgba($color-primary, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 70%, rgba($color-cyan, 0.08) 0%, transparent 40%);
+  color: $color-text-white;
+  padding: 100px 0;
+  
+  .subscription-card {
+    background-color: $color-dark-light;
+    border-radius: $border-radius-lg;
+    border: 1px solid rgba($color-white, 0.08);
+    padding: 60px;
+    box-shadow: $shadow-lg, 0 0 50px rgba($color-primary, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+    
+    @media (max-width: $breakpoint-desktop) {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 40px;
+      gap: 40px;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba($color-primary, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  }
+  
+  .subscription-left {
+    flex: 1.2;
+  }
+  
+  .subscription-tag {
+    color: $color-cyan;
+    font-family: $font-secondary;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  .subscription-title {
+    font-size: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.15;
+    margin-bottom: 25px;
+    
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 28px;
+    }
+    
+    span.highlight {
+      color: $color-primary;
+    }
+  }
+  
+  .subscription-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+    
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba($color-white, 0.8);
+      
+      svg {
+        width: 18px;
+        height: 18px;
+        color: $color-cyan;
+        flex-shrink: 0;
+      }
+    }
+  }
+  
+  .subscription-right {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($color-dark-deep, 0.5);
+    border: 1px solid rgba($color-white, 0.05);
+    border-radius: $border-radius-md;
+    padding: 40px;
+    text-align: center;
+    z-index: 1;
+    
+    @media (max-width: $breakpoint-desktop) {
+      padding: 30px;
+    }
+  }
+  
+  .price-wrap {
+    margin-bottom: 25px;
+  }
+  
+  .price-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgba($color-white, 0.5);
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .price-val {
+    font-family: $font-secondary;
+    font-size: 48px;
+    font-weight: 800;
+    color: $color-white;
+    line-height: 1;
+    
+    span.period {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba($color-white, 0.6);
+    }
+  }
+  
+  .btn-subscribe {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .subscription-note {
+    font-size: 11px;
+    color: rgba($color-white, 0.4);
+    line-height: 1.4;
+  }
+}

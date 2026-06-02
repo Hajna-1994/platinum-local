@@ -1,0 +1,21 @@
+// Main entry SASS stylesheet for Platinum Custom WordPress Theme
+
+// Core configuration
+@import 'variables';
+
+// Base styling & resets
+@import 'base';
+@import 'layout';
+@import 'buttons';
+
+// Layout blocks & Components
+@import 'header';
+@import 'hero';
+@import 'about';
+@import 'services';
+@import 'subscription';
+@import 'testimonials';
+@import 'service-areas';
+@import 'faq';
+@import 'news';
+@import 'footer';

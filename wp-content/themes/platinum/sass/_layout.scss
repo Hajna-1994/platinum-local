@@ -1,0 +1,107 @@
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $container-padding;
+  padding-left: $container-padding;
+}
+
+// Flexbox Grid utilities
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+// 2, 3, and 4-column layouts using CSS Grid
+.grid {
+  display: grid;
+  gap: 30px;
+  
+  &-2 {
+    grid-template-columns: repeat(2, 1fr);
+    
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &-3 {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &-4 {
+    grid-template-columns: repeat(4, 1fr);
+    
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Utility margins
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-40 { margin-bottom: 40px; }
+.mb-50 { margin-bottom: 50px; }
+
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+
+// Watermark background layouts
+.section-watermark {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  font-family: $font-secondary;
+  font-size: 120px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(10, 17, 40, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 60px;
+    top: 20px;
+  }
+}
+
+.bg-dark {
+  .section-watermark {
+    color: rgba(255, 255, 255, 0.02);
+  }
+}

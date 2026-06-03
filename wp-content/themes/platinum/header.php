@@ -56,11 +56,7 @@
 		<div class="header-actions">
 			<a href="<?php echo esc_url( wp_login_url() ); ?>" class="btn-login">
 				<?php esc_html_e( 'Login', 'platinum' ); ?>
-				<span class="arrow-circle" aria-hidden="true">
-					<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M2 5H8M8 5L5 2M8 5L5 8" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-					</svg>
-				</span>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/login-arrow.svg' ); ?>" alt="<?php esc_attr_e( 'Login', 'platinum' ); ?>">
 			</a>
 		</div>
 

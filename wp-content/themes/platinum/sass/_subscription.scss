@@ -1,153 +1,141 @@
-.subscription-section {
-  background-color: $color-dark-deep;
-  background-image: radial-gradient(circle at 10% 30%, rgba($color-primary, 0.12) 0%, transparent 40%),
-                    radial-gradient(circle at 90% 70%, rgba($color-cyan, 0.08) 0%, transparent 40%);
-  color: $color-text-white;
-  padding: 100px 0;
-  
-  .subscription-card {
-    background-color: $color-dark-light;
-    border-radius: $border-radius-lg;
-    border: 1px solid rgba($color-white, 0.08);
-    padding: 60px;
-    box-shadow: $shadow-lg, 0 0 50px rgba($color-primary, 0.05);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-    position: relative;
-    overflow: hidden;
-    
-    @media (max-width: $breakpoint-desktop) {
-      flex-direction: column;
-      align-items: stretch;
-      padding: 40px;
-      gap: 40px;
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba($color-primary, 0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
+// Promo / subscription CTA — Figma centered layout
+
+.promo-section {
+  position: relative;
+  padding: 100px 0 110px;
+  color: $color-white;
+  overflow: hidden;
+  text-align: center;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 72px 0 80px;
   }
-  
-  .subscription-left {
-    flex: 1.2;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
-  
-  .subscription-tag {
-    color: $color-cyan;
-    font-family: $font-secondary;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
+
+  &__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     display: block;
   }
-  
-  .subscription-title {
-    font-size: 40px;
-    font-weight: 800;
-    text-transform: uppercase;
-    line-height: 1.15;
-    margin-bottom: 25px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      font-size: 28px;
-    }
-    
-    span.highlight {
-      color: $color-primary;
-    }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: #000;
   }
-  
-  .subscription-features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 30px;
-    
-    @media (max-width: $breakpoint-mobile) {
-      grid-template-columns: 1fr;
-    }
-    
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-      color: rgba($color-white, 0.8);
-      
-      svg {
-        width: 18px;
-        height: 18px;
-        color: $color-cyan;
-        flex-shrink: 0;
-      }
-    }
-  }
-  
-  .subscription-right {
-    flex: 0.8;
+
+  &__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: rgba($color-dark-deep, 0.5);
-    border: 1px solid rgba($color-white, 0.05);
-    border-radius: $border-radius-md;
-    padding: 40px;
-    text-align: center;
-    z-index: 1;
-    
-    @media (max-width: $breakpoint-desktop) {
-      padding: 30px;
-    }
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  
-  .price-wrap {
-    margin-bottom: 25px;
-  }
-  
-  .price-label {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: rgba($color-white, 0.5);
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .price-val {
+
+  &__title {
+    margin: 0 0 60px;
     font-family: $font-secondary;
-    font-size: 48px;
-    font-weight: 800;
+    font-size: clamp(1.75rem, 4vw, 80px);
+    font-weight: bold;
+    line-height: 70px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     color: $color-white;
-    line-height: 1;
-    
-    span.period {
-      font-size: 16px;
-      font-weight: 500;
-      color: rgba($color-white, 0.6);
+    text-align: left;
+  }
+
+  &__title-line {
+    display: block;
+
+    &--gradient {
+      background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 45%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
     }
   }
-  
-  .btn-subscribe {
-    width: 100%;
-    margin-bottom: 15px;
+
+  &__desc {
+    margin: 0 0 36px;
+    max-width: 520px;
+    font-family: $font-primary;
+    font-size: 27px;
+    line-height: 35px;
+    color: rgba($color-white, 0.85);
+    text-align: left;
   }
-  
-  .subscription-note {
-    font-size: 11px;
-    color: rgba($color-white, 0.4);
-    line-height: 1.4;
+
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 16px 48px;
+    margin: 0 0 40px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      justify-items: start;
+      width: 100%;
+      max-width: 280px;
+    }
   }
+
+  &__feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: $font-primary;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #9B9DA3;
+    white-space: nowrap;
+
+    @media (max-width: $breakpoint-mobile) {
+      white-space: normal;
+    }
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fbbf24;
+    color: $color-dark-deep;
+
+    svg {
+      width: 12px;
+      height: auto;
+    }
+  }
+
+  &__cta {
+    min-width: 220px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+// Legacy subscription classes (if referenced elsewhere)
+.subscription-section {
+  @extend .promo-section;
 }

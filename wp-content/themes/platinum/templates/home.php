@@ -107,410 +107,526 @@ get_header();
 </div>
 <div class="mobile-menu-overlay"></div> -->
 
+<!-- Video banner: autoplay (muted) + thumbnail overlay until play click -->
+<section class="video-banner" aria-label="<?php esc_attr_e( 'Watch our technicians at work', 'platinum' ); ?>">
+	<div class="video-banner__inner">
+		<video
+			class="video-banner__video"
+			autoplay
+			muted
+			loop
+			playsinline
+			preload="auto"
+		>
+			<source src="<?php echo esc_url( get_template_directory_uri() . '/assets/hero-banner-video.mp4' ); ?>" type="video/mp4">
+			<?php esc_html_e( 'Your browser does not support the video tag.', 'platinum' ); ?>
+		</video>
+	</div>
+</section>
+
 <!-- About Us Section -->
 <section id="about" class="about-section">
-	<span class="section-watermark">About Us</span>
 	<div class="container">
-		<div class="grid-2">
-			<!-- Left Column -->
-			<div class="about-left">
-				<div class="about-watermark">About Us</div>
-				<a href="#contact" class="text-link">
-					Know more about us
-					<?php platinum_svg( 'arrow-right' ); ?>
+		<div class="about-section__grid">
+			<div class="about-section__col about-section__col--left">
+				<p class="about-section__watermark" aria-hidden="true"><?php esc_html_e( 'About us', 'platinum' ); ?></p>
+				<a href="#contact" class="about-section__link">
+					<!-- <span class="about-section__link-icon" aria-hidden="true">
+						<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8 20C8 20 14 14 18 10M18 10H12M18 10V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</span> -->
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/read-more.svg' ); ?>" alt="<?php esc_attr_e( 'Know more about us', 'platinum' ); ?>">
+					<?php esc_html_e( 'Know more about us', 'platinum' ); ?>
 				</a>
-				<div class="about-main-image-wrapper">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/about-repair.jpg' ); ?>" alt="Hands repairing laptop with tools">
-				</div>
+				<figure class="about-section__figure about-section__figure--main">
+					<img
+						src="<?php echo esc_url( get_template_directory_uri() . '/images/about-main.png' ); ?>"
+						alt="<?php esc_attr_e( 'Technician using a multimeter to repair a laptop motherboard', 'platinum' ); ?>"
+						width="520"
+						height="640"
+						loading="lazy"
+					>
+				</figure>
 			</div>
-			
-			<!-- Right Column -->
-			<div class="about-right">
-				<h2 class="about-heading">Simplifying IT Support for <span>Homes and Businesses</span></h2>
-				<div class="about-pill-image-wrapper">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/about-pill.jpg' ); ?>" alt="Repairing motherboard components">
-				</div>
-				<p class="about-description-1">
-					At Platinum Tech Solutions, we understand how disruptive tech problems can be. That's why we provide fast, reliable support when you need it most.
+
+			<div class="about-section__col about-section__col--right">
+				<h2 class="about-section__title">
+					<?php esc_html_e( 'Simplifying IT Support for', 'platinum' ); ?>
+					<span class="about-section__title-muted"><?php esc_html_e( 'Homes', 'platinum' ); ?></span>
+					<?php esc_html_e( 'and', 'platinum' ); ?>
+					<?php esc_html_e( 'Businesses', 'platinum' ); ?>
+				</h2>
+				<figure class="about-section__figure about-section__figure--pill">
+					<img
+						src="<?php echo esc_url( get_template_directory_uri() . '/images/about-pill1.jpg' ); ?>"
+						alt=""
+						width="200"
+						height="72"
+						loading="lazy"
+					>
+				</figure>
+				<p class="about-section__text">
+					<?php esc_html_e( 'At Platinum Tech Solutions, we understand how disruptive tech problems can be. That\'s why we provide fast, reliable support when you need it most.', 'platinum' ); ?>
 				</p>
-				<p class="about-description-2">
-					Brand team building results after premium web-readiness value web enabled e-business engage web enabled strategic. Our dedication to efficiency guarantees minimal downtime and maximum output.
+				<p class="about-section__text about-section__text--lead">
+					<?php esc_html_e( 'Brand team building results after premium web-readiness value web enabled e-business engage web enabled strategic.', 'platinum' ); ?>
 				</p>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="services-section bg-light">
-	<span class="section-watermark">Services</span>
+<!-- Services Section — Figma slider -->
+<?php
+$platinum_services = array(
+	array(
+		'title'   => __( 'Computer and Laptop Repairs', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img).png',
+		'alt'     => __( 'Computer repair', 'platinum' ),
+		'overlay' => __( 'Addressing hardware and software issues.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'Mobile Phones and Tablet Repairs', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (1).png',
+		'alt'     => __( 'Mobile repair', 'platinum' ),
+		'overlay' => __( 'Fixing everyday mobile device problems.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'Virus & Malware Removal', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (2).png',
+		'alt'     => __( 'Virus removal', 'platinum' ),
+		'overlay' => __( 'Protecting devices from security threats.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'Wi-Fi & Network Setup', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (3).png',
+		'alt'     => __( 'Network setup', 'platinum' ),
+		'overlay' => __( 'Improving connectivity and network performance.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'Software Installation & Troubleshooting', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (4).png',
+		'alt'     => __( 'Software troubleshooting', 'platinum' ),
+		'overlay' => __( 'Resolving software and system issues.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'Data Recovery & Backup Solutions', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (5).png',
+		'alt'     => __( 'Data recovery', 'platinum' ),
+		'overlay' => __( 'Protecting and recovering important files.', 'platinum' ),
+	),
+	array(
+		'title'   => __( 'General Tech Support & Training', 'platinum' ),
+		'image'   => 'Computer and Laptop Repairs (Img) (6).png',
+		'alt'     => __( 'Tech support', 'platinum' ),
+		'overlay' => __( 'Simple support for everyday tech problems.', 'platinum' ),
+	),
+);
+$platinum_assets_uri = get_template_directory_uri() . '/assets/';
+?>
+<section id="services" class="services-section">
 	<div class="container">
-		<div class="services-wrapper">
-			<!-- Sticky Info -->
-			<div class="services-info">
-				<div class="services-watermark">Our Services</div>
-				<h2 class="services-heading">Services We Can Provide</h2>
-				<p class="services-desc">
-					From instant remote support to professional hands-on hardware fixes, we have you covered for all things technical.
+		<div class="services-section__header">
+			<div class="services-section__intro">
+				<p class="services-section__desc">
+					<?php esc_html_e( 'From device repairs to network setup and data recovery, our certified technicians provide complete solutions for homes and businesses.', 'platinum' ); ?>
 				</p>
-				<a href="#contact" class="text-link">
-					View All Services
-					<?php platinum_svg( 'arrow-right' ); ?>
+				<a href="#contact" class="services-section__link">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/read-more.svg' ); ?>" alt="<?php esc_attr_e( 'Know more about us', 'platinum' ); ?>">
+					<?php esc_html_e( 'View details', 'platinum' ); ?>
 				</a>
 			</div>
-			
-			<!-- Cards Grid -->
-			<div class="services-grid">
-				<!-- Card 1: Featured -->
-				<div class="service-card service-card-featured">
-					<div class="service-card-icon">
-						<?php platinum_svg( 'shield' ); ?>
-					</div>
-					<h3 class="service-card-title">Remote Assistance</h3>
-					<p class="service-card-desc">Instant online desktop support for setup, viruses, and software help.</p>
-					<a href="#" class="service-card-link">Learn More <?php platinum_svg( 'arrow-right' ); ?></a>
-				</div>
-				
-				<!-- Card 2: Image Card -->
-				<div class="service-card">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/service-tech-1.jpg' ); ?>" alt="Hardware Repair">
-					<div class="service-card-content">
-						<div class="service-card-icon">
-							<?php platinum_svg( 'wrench' ); ?>
+			<p class="services-section__watermark" aria-hidden="true"><?php esc_html_e( 'Our', 'platinum' ); ?><br><?php esc_html_e( 'services', 'platinum' ); ?></p>
+		</div>
+
+		<div class="services-section__carousel" aria-label="<?php esc_attr_e( 'Our services', 'platinum' ); ?>">
+			<div class="swiper services-swiper">
+				<div class="swiper-wrapper">
+					<?php foreach ( $platinum_services as $service ) : ?>
+						<div class="swiper-slide">
+							<article class="service-card">
+								<div class="service-card__image">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/images/service1.png' ); ?>" alt="<?php esc_attr_e( 'View details', 'platinum' ); ?>">
+									<div class="service-card__overlay">
+										<a href="#" class="service-card__explore" aria-label="<?php echo esc_attr( sprintf( __( 'Explore %s', 'platinum' ), $service['title'] ) ); ?>">
+											<svg width="14" height="24" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+												<path d="M2 2L12 12L2 22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										</a>
+										<p class="service-card__overlay-text"><?php echo esc_html( $service['overlay'] ); ?></p>
+									</div>
+								</div>
+								<h3 class="service-card__title"><?php echo esc_html( $service['title'] ); ?></h3>
+							</article>
 						</div>
-						<h3 class="service-card-title">Hardware Repair</h3>
-						<a href="#" class="service-card-link">Learn More <?php platinum_svg( 'arrow-right' ); ?></a>
-					</div>
+					<?php endforeach; ?>
 				</div>
-				
-				<!-- Card 3: Image Card -->
-				<div class="service-card">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/service-tech-2.jpg' ); ?>" alt="Network Setup">
-					<div class="service-card-content">
-						<div class="service-card-icon">
-							<?php platinum_svg( 'wifi' ); ?>
-						</div>
-						<h3 class="service-card-title">Network & Wi-Fi</h3>
-						<a href="#" class="service-card-link">Learn More <?php platinum_svg( 'arrow-right' ); ?></a>
-					</div>
-				</div>
+				<div class="swiper-pagination services-swiper-pagination"></div>
 			</div>
 		</div>
 	</div>
 </section>
 
 <!-- Subscription Section -->
-<section id="subscription" class="subscription-section bg-dark-deep">
-	<div class="container">
-		<div class="subscription-card">
-			<!-- Left Details -->
-			<div class="subscription-left">
-				<span class="subscription-tag">Membership</span>
-				<h2 class="subscription-title">Unlimited Tech Support With <span class="highlight">One Simple Plan</span></h2>
-				<div class="subscription-features">
-					<div class="feature-item">
-						<?php platinum_svg( 'check' ); ?>
-						<span>Unlimited Remote Support</span>
-					</div>
-					<div class="feature-item">
-						<?php platinum_svg( 'check' ); ?>
-						<span>Same-Day Booking Priority</span>
-					</div>
-					<div class="feature-item">
-						<?php platinum_svg( 'check' ); ?>
-						<span>Certified IT Technicians</span>
-					</div>
-					<div class="feature-item">
-						<?php platinum_svg( 'check' ); ?>
-						<span>No Hidden Contracts</span>
-					</div>
-				</div>
-			</div>
-			
-			<!-- Right Price Block -->
-			<div class="subscription-right">
-				<div class="price-wrap">
-					<span class="price-label">Personal Plan</span>
-					<div class="price-val">$49<span class="period">/mo</span></div>
-				</div>
-				<a href="#subscribe" class="btn btn-primary btn-subscribe">Subscribe Now</a>
-				<p class="subscription-note">Billed monthly. Cancel anytime. Terms apply.</p>
-			</div>
-		</div>
+<!-- Promo / subscription CTA — Figma -->
+<section id="subscription" class="promo-section">
+	<div class="promo-section__bg" aria-hidden="true">
+		<img
+			class="promo-section__bg-image"
+			src="<?php echo esc_url( get_template_directory_uri() . '/images/promo-bg.png' ); ?>"
+			alt=""
+			loading="lazy"
+			decoding="async"
+		>
+		<div class="promo-section__overlay"></div>
+	</div>
+	<div class="container promo-section__inner">
+		<h2 class="promo-section__title">Unlimited Tech Support With One <span class="promo-section__title-line--gradient">Simple Plan</span>
+		</h2>
+
+		<p class="promo-section__desc">
+			<?php esc_html_e( 'Get unlimited expert help remotely without booking individual appointments.', 'platinum' ); ?>
+		</p>
+
+		<ul class="promo-section__features">
+			<li class="promo-section__feature">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/check.svg' ); ?>" alt="<?php esc_attr_e( 'Unlimited Support', 'platinum' ); ?>">
+				<?php esc_html_e( 'Unlimited Support', 'platinum' ); ?>
+			</li>
+			<li class="promo-section__feature">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/images/check.svg' ); ?>" alt="<?php esc_attr_e( 'Unlimited Support', 'platinum' ); ?>">
+			<?php esc_html_e( 'Faster Resolution', 'platinum' ); ?>
+				<?php esc_html_e( 'Faster Resolution', 'platinum' ); ?>
+			</li>
+			<li class="promo-section__feature">
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/images/check.svg' ); ?>" alt="<?php esc_attr_e( 'Unlimited Support', 'platinum' ); ?>">
+			<?php esc_html_e( 'Unlimited Support', 'platinum' ); ?>
+				<?php esc_html_e( 'Monthly Recurring Plan', 'platinum' ); ?>
+			</li>
+			<li class="promo-section__feature">
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/images/check.svg' ); ?>" alt="<?php esc_attr_e( 'Unlimited Support', 'platinum' ); ?>">
+			<?php esc_html_e( 'Unlimited Support', 'platinum' ); ?>
+				<?php esc_html_e( 'Priority Service', 'platinum' ); ?>
+			</li>
+		</ul>
+
+		<a href="#subscribe" class="btn btn-primary promo-section__cta">
+			<?php esc_html_e( 'Subscribe Now', 'platinum' ); ?>
+		</a>
 	</div>
 </section>
 
-<!-- Testimonials Section -->
+
+<!-- Testimonials — Figma Success Stories slider -->
+<?php
+$platinum_testimonials = array(
+	array(
+		'quote'    => __( 'I booked a same-day laptop repair through their website and the process was incredibly smooth. The technician arrived on time and fixed the issue quickly. Highly professional service.', 'platinum' ),
+		'name'     => 'Michael R',
+		'location' => 'Sydney, NSW',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'The unlimited remote support subscription is worth every dollar. Whenever I face an issue, their team resolves it within minutes. Fast and reliable support.', 'platinum' ),
+		'name'     => 'Sarah L',
+		'location' => 'Melbourne, VIC',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'My Wi-Fi setup was a complete mess before Platinum Tech stepped in. The technician explained everything clearly and improved our network performance significantly.', 'platinum' ),
+		'name'     => 'David T',
+		'location' => 'Brisbane, QLD',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'The transaction was fast and smooth because of the immense help of the well-informed staff. They do their job with diligence and live up to the name of the brand.', 'platinum' ),
+		'name'     => 'Anita',
+		'location' => 'Perth, WA',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'They recovered important files from my laptop after a sudden crash. The process was transparent, quick, and far less stressful than I expected.', 'platinum' ),
+		'name'     => 'James K',
+		'location' => 'Adelaide, SA',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'Our small office needed a full network refresh and new workstations set up. Platinum Tech handled everything in one visit and trained our team.', 'platinum' ),
+		'name'     => 'Emma W',
+		'location' => 'Canberra, ACT',
+		'avatar'   => 'avatar-1.jpg',
+	),
+	array(
+		'quote'    => __( 'From booking online to the follow-up call, every step felt professional. They removed malware, secured my accounts, and explained how to avoid the same issue.', 'platinum' ),
+		'name'     => 'Chris M',
+		'location' => 'Hobart, TAS',
+		'avatar'   => 'avatar-1.jpg',
+	),
+);
+$platinum_avatar_uri = get_template_directory_uri() . '/images/';
+?>
 <section id="testimonials" class="testimonials-section">
-	<span class="section-watermark">Reviews</span>
 	<div class="container">
-		<div class="testimonials-wrapper">
-			<!-- Sticky Info -->
-			<div class="testimonials-info">
-				<div class="testimonials-watermark">Success Stories</div>
-				<h2 class="testimonials-heading">Trusted by Customers <span>Across Australia</span></h2>
-				<a href="#" class="text-link">
-					Read All Reviews
-					<?php platinum_svg( 'arrow-right' ); ?>
-				</a>
+		<div class="testimonials-section__header">
+			<p class="testimonials-section__watermark" aria-hidden="true"><?php esc_html_e( 'Success', 'platinum' ); ?><br><?php esc_html_e( 'Stories', 'platinum' ); ?></p>
+			<div class="testimonials-section__intro">
+				<h2 class="testimonials-section__heading">
+					<?php esc_html_e( 'Trusted by Customers Across', 'platinum' ); ?>
+					<span class="testimonials-section__heading-muted"><?php esc_html_e( 'Australia', 'platinum' ); ?></span>
+				</h2>
+				<p class="testimonials-section__desc">
+					<?php esc_html_e( 'Hear from customers who trust us for fast, professional, and dependable tech support services.', 'platinum' ); ?>
+				</p>
 			</div>
-			
-			<!-- Grid -->
-			<div class="testimonials-grid">
-				<!-- Testimonial 1 -->
-				<div class="testimonial-card">
-					<div class="testimonial-stars">
-						<?php for($i=0; $i<5; $i++) { platinum_svg( 'star' ); } ?>
-					</div>
-					<p class="testimonial-text">
-						"Platinum Tech Solutions sorted out my home network issues in under an hour. Their remote setup was seamless, and the technician was incredibly patient."
-					</p>
-					<div class="testimonial-author">
-						<div class="author-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/images/avatar-1.jpg' ); ?>" alt="Sarah J.">
+		</div>
+
+		<div class="testimonials-section__carousel" aria-label="<?php esc_attr_e( 'Customer testimonials', 'platinum' ); ?>">
+			<div class="swiper testimonials-swiper">
+				<div class="swiper-wrapper">
+					<?php foreach ( $platinum_testimonials as $item ) : ?>
+						<div class="swiper-slide">
+							<article class="testimonial-card">
+								<ul class="testimonial-card__stars" aria-label="<?php esc_attr_e( '5 out of 5 stars', 'platinum' ); ?>">
+									<?php for ( $i = 0; $i < 5; $i++ ) : ?>
+										<li class="testimonial-card__star">
+											<?php platinum_svg( 'star' ); ?>
+										</li>
+									<?php endfor; ?>
+								</ul>
+								<p class="testimonial-card__quote"><?php echo esc_html( $item['quote'] ); ?></p>
+								<footer class="testimonial-card__author">
+									<div class="testimonial-card__avatar">
+										<img
+											src="<?php echo esc_url( $platinum_avatar_uri . $item['avatar'] ); ?>"
+											alt=""
+											width="44"
+											height="44"
+											loading="lazy"
+										>
+									</div>
+									<div>
+										<p class="testimonial-card__name"><?php echo esc_html( $item['name'] ); ?></p>
+										<p class="testimonial-card__location"><?php echo esc_html( $item['location'] ); ?></p>
+									</div>
+								</footer>
+							</article>
 						</div>
-						<div class="author-details">
-							<div class="author-name">Sarah Jenkins</div>
-							<div class="author-title">Homeowner, Sydney</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Testimonial 2 -->
-				<div class="testimonial-card">
-					<div class="testimonial-stars">
-						<?php for($i=0; $i<5; $i++) { platinum_svg( 'star' ); } ?>
-					</div>
-					<p class="testimonial-text">
-						"The monthly subscription is a lifesaver for our small business. Whenever something goes down, they jump on a call immediately. Highly recommended!"
-					</p>
-					<div class="testimonial-author">
-						<div class="author-img">
-							<img src="<?php echo esc_url( get_template_directory_uri() . '/images/avatar-2.jpg' ); ?>" alt="Mark D.">
-						</div>
-						<div class="author-details">
-							<div class="author-name">Mark Donaldson</div>
-							<div class="author-title">Founder, Melb Media</div>
-						</div>
-					</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- Service Areas Section -->
+<!-- Service Areas — Figma state tabs + city columns + map -->
 <section id="service-areas" class="service-areas-section">
 	<div class="container">
-		<h2 class="areas-heading">Service Areas</h2>
-		
-		<!-- Tabs -->
-		<div class="areas-tabs">
-			<button class="area-tab-btn active" data-city="sydney">Sydney</button>
-			<button class="area-tab-btn" data-city="melbourne">Melbourne</button>
-			<button class="area-tab-btn" data-city="brisbane">Brisbane</button>
-			<button class="area-tab-btn" data-city="adelaide">Adelaide</button>
-			<button class="area-tab-btn" data-city="perth">Perth</button>
-			<button class="area-tab-btn" data-city="hobart">Hobart</button>
-			<button class="area-tab-btn" data-city="darwin">Darwin</button>
-		</div>
-		
-		<!-- Content Grid -->
-		<div class="areas-content">
-			<!-- Details Panel -->
-			<div class="areas-details">
-				<h3 class="city-name" id="active-city-name">Sydney, NSW</h3>
-				<p class="city-desc" id="active-city-desc">
-					Providing lightning-fast IT support and expert tech repair services across the greater Sydney metropolitan area. From the CBD to the suburbs, our certified technicians are on hand same-day.
-				</p>
-				<h4 class="mb-20 font-secondary" style="font-size: 16px; text-transform: uppercase; color: #0052FF; font-weight: 700; letter-spacing: 0.5px;">Popular Suburbs Covered:</h4>
-				<div class="suburbs-grid" id="active-suburbs-grid">
-					<div class="suburb-item">Sydney CBD</div>
-					<div class="suburb-item">North Sydney</div>
-					<div class="suburb-item">Parramatta</div>
-					<div class="suburb-item">Surry Hills</div>
-					<div class="suburb-item">Chatswood</div>
-					<div class="suburb-item">Manly</div>
-					<div class="suburb-item">Ryde</div>
-					<div class="suburb-item">Bondi Junction</div>
-				</div>
+		<header class="service-areas-section__header">
+			<h2 class="service-areas-section__watermark" aria-hidden="true"><?php esc_html_e( 'Service Areas', 'platinum' ); ?></h2>
+			<p class="service-areas-section__desc">
+				<?php esc_html_e( 'We provide reliable tech support services across major cities and regions in Australia, ensuring fast and professional assistance wherever you are.', 'platinum' ); ?>
+			</p>
+		</header>
+
+		<div class="service-areas-section__tabs-wrap">
+			<div class="service-areas-section__tabs" role="tablist" aria-label="<?php esc_attr_e( 'Australian states and territories', 'platinum' ); ?>">
+				<?php
+				$platinum_area_states = array( 'NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT' );
+				foreach ( $platinum_area_states as $state_code ) :
+					$is_active = ( 'NSW' === $state_code );
+					?>
+					<button
+						type="button"
+						class="service-areas-section__tab<?php echo $is_active ? ' is-active' : ''; ?>"
+						role="tab"
+						aria-selected="<?php echo $is_active ? 'true' : 'false'; ?>"
+						data-state="<?php echo esc_attr( strtolower( $state_code ) ); ?>"
+					>
+						<?php echo esc_html( $state_code ); ?>
+					</button>
+				<?php endforeach; ?>
 			</div>
-			
-			<!-- SVG Australia Map -->
-			<div class="map-container">
-				<svg viewBox="0 0 800 650" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<defs>
-						<!-- Map Gradient Fill -->
-						<linearGradient id="map-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-							<stop offset="0%" stop-color="#0052FF"/>
-							<stop offset="100%" stop-color="#00D8FF"/>
-						</linearGradient>
-					</defs>
-					
-					<!-- State Borders & Shapes (Simplified Stylized Australia Representation) -->
-					<!-- Western Australia (WA) -->
-					<path id="state-wa" class="map-state" d="M150 120 L270 120 L270 470 L130 470 L90 400 L80 320 L100 240 Z"/>
-					
-					<!-- Northern Territory (NT) -->
-					<path id="state-nt" class="map-state" d="M270 120 L400 120 L400 310 L270 310 Z"/>
-					
-					<!-- South Australia (SA) -->
-					<path id="state-sa" class="map-state" d="M270 310 L400 310 L400 350 L480 350 L480 470 L380 470 L270 470 Z"/>
-					
-					<!-- Queensland (QLD) -->
-					<path id="state-qld" class="map-state" d="M400 120 L530 140 L580 230 L550 350 L480 350 L400 350 L400 120 Z"/>
-					
-					<!-- New South Wales (NSW) -->
-					<path id="state-nsw" class="map-state active" d="M480 350 L550 350 L560 450 L480 470 Z"/>
-					
-					<!-- Victoria (VIC) -->
-					<path id="state-vic" class="map-state" d="M480 470 L560 450 L530 500 L460 490 Z"/>
-					
-					<!-- Tasmania (TAS) -->
-					<path id="state-tas" class="map-state" d="M480 530 L520 530 L510 570 L470 560 Z"/>
-					
-					<!-- City Point Markers -->
-					<circle class="map-marker active" data-city="sydney" cx="540" cy="420" />
-					<circle class="map-marker" data-city="melbourne" cx="500" cy="480" />
-					<circle class="map-marker" data-city="brisbane" cx="550" cy="280" />
-					<circle class="map-marker" data-city="adelaide" cx="390" cy="440" />
-					<circle class="map-marker" data-city="perth" cx="120" cy="420" />
-					<circle class="map-marker" data-city="hobart" cx="495" cy="550" />
-					<circle class="map-marker" data-city="darwin" cx="330" cy="150" />
-				</svg>
+			<div class="service-areas-section__tab-track" aria-hidden="true">
+				<span class="service-areas-section__tab-dot"></span>
+			</div>
+		</div>
+
+		<div class="service-areas-section__body">
+			<div class="service-areas-section__cities" id="areas-cities-panel" role="tabpanel">
+				<ul class="service-areas-section__column">
+					<li class="service-areas-section__city service-areas-section__city--featured">Sydney</li>
+					<li class="service-areas-section__city">Central Coast</li>
+					<li class="service-areas-section__city">Mittagong</li>
+					<li class="service-areas-section__city">Orange</li>
+					<li class="service-areas-section__city">Taree</li>
+					<li class="service-areas-section__city">Coffs Harbour</li>
+				</ul>
+				<ul class="service-areas-section__column">
+					<li class="service-areas-section__city">Newcastle</li>
+					<li class="service-areas-section__city">Port Macquarie</li>
+					<li class="service-areas-section__city">Mittagong</li>
+					<li class="service-areas-section__city">Tweed Heads</li>
+					<li class="service-areas-section__city">Taree</li>
+					<li class="service-areas-section__city">Bathurst</li>
+					<li class="service-areas-section__city">Maitland</li>
+				</ul>
+				<ul class="service-areas-section__column">
+					<li class="service-areas-section__city">Nowra</li>
+					<li class="service-areas-section__city">Tamworth</li>
+					<li class="service-areas-section__city">Wollongong</li>
+				</ul>
+			</div>
+
+			<div class="service-areas-section__map">
+				<img
+					src="<?php echo esc_url( get_template_directory_uri() . '/images/service-areas-map.png' ); ?>"
+					alt="<?php esc_attr_e( 'Map of Australia', 'platinum' ); ?>"
+					width="420"
+					height="380"
+					loading="lazy"
+					decoding="async"
+				>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- FAQ Section -->
-<section id="faq" class="faq-section bg-light">
+<!-- FAQ — Figma two-column accordion -->
+<?php
+$platinum_faqs = array(
+	array(
+		'question' => __( 'Why should I choose Platinum Tech Solutions?', 'platinum' ),
+		'answer'   => __( 'We combine certified technicians, transparent pricing, and same-day options across Australia. Whether you need a one-off repair or ongoing remote support, you get professional service without the runaround.', 'platinum' ),
+		'open'     => false,
+	),
+	array(
+		'question' => __( 'How much does on-site support cost?', 'platinum' ),
+		'answer'   => __( 'The price for on-site support depends on your city or town and the type of service required. Remote support and subscription plans are quoted upfront so you know what to expect before we start. Contact us for a quote tailored to your location.', 'platinum' ),
+		'open'     => true,
+	),
+	array(
+		'question' => __( 'I\'m a home computer user, not a business. Are Platinum Tech Solutions services still available to me?', 'platinum' ),
+		'answer'   => __( 'Yes. We support home users and small businesses with the same level of care—device setup, virus removal, Wi-Fi help, backups, and unlimited remote support on eligible plans.', 'platinum' ),
+		'open'     => false,
+	),
+	array(
+		'question' => __( 'What kind of computer services does Platinum Tech Solutions offer?', 'platinum' ),
+		'answer'   => __( 'We offer remote IT support, on-site repairs, network and Wi-Fi setup, virus and malware removal, data recovery, new device setup, business IT support, and monthly subscription plans for ongoing help.', 'platinum' ),
+		'open'     => false,
+	),
+	array(
+		'question' => __( 'Do you offer remote support for all devices?', 'platinum' ),
+		'answer'   => __( 'Yes. Our technicians can assist remotely with Windows PCs, Macs, smartphones, tablets, and many smart-home devices when you have a stable internet connection.', 'platinum' ),
+		'open'     => false,
+		'hidden'   => true,
+	),
+);
+?>
+<section id="faq" class="faq-section">
 	<div class="container">
-		<div class="faq-wrapper">
-			<!-- Sticky FAQ Info -->
-			<div class="faq-info">
-				<h2 class="faq-heading">Your Questions, <span>Answered</span></h2>
-				<p class="faq-desc">
-					Everything you need to know about our personal membership, remote troubleshooting, and on-site support booking.
+		<header class="faq-section__header">
+			<h2 class="faq-section__title">
+				<?php esc_html_e( 'Your Questions,', 'platinum' ); ?>
+				<span class="faq-section__title-muted"><?php esc_html_e( 'Answered', 'platinum' ); ?></span>
+			</h2>
+		</header>
+
+		<div class="faq-section__body">
+			<aside class="faq-section__aside">
+				<p class="faq-section__intro">
+					<?php esc_html_e( 'Brand team building results after premium web-readiness value. Distinctively conceptualize visionary action items without market positioning best practices.', 'platinum' ); ?>
 				</p>
-				<a href="#contact" class="text-link">
-					Get In Touch
-					<?php platinum_svg( 'arrow-right' ); ?>
-				</a>
-			</div>
-			
-			<!-- Accordion -->
-			<div class="faq-accordion">
-				<!-- FAQ 1 -->
-				<div class="faq-item active">
-					<button class="faq-trigger">
-						Do you offer remote support for all devices?
-						<span class="faq-icon"></span>
-					</button>
-					<div class="faq-content">
-						<p>Yes! Our certified technicians can assist you remotely with Windows PCs, Apple Macs, smartphones, tablets, and smart home appliances, provided you have a stable internet connection.</p>
+				<button type="button" class="faq-section__load-more" id="faq-load-more" aria-expanded="false">
+					<!-- <?php platinum_svg( 'reload' ); ?> -->
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/read-more.svg' ); ?>" alt="<?php esc_attr_e( 'Know more about us', 'platinum' ); ?>">
+					<?php esc_html_e( 'Load More', 'platinum' ); ?>
+					<!-- <span><?php esc_html_e( 'Load More', 'platinum' ); ?></span> -->
+				</button>
+			</aside>
+
+			<div class="faq-section__accordion" role="region" aria-label="<?php esc_attr_e( 'Frequently asked questions', 'platinum' ); ?>">
+				<?php foreach ( $platinum_faqs as $index => $faq ) : ?>
+					<div
+						class="faq-section__item<?php echo ! empty( $faq['open'] ) ? ' is-open' : ''; ?><?php echo ! empty( $faq['hidden'] ) ? ' faq-section__item--hidden' : ''; ?>"
+						data-faq-index="<?php echo esc_attr( (string) $index ); ?>"
+					>
+						<button
+							type="button"
+							class="faq-section__trigger"
+							aria-expanded="<?php echo ! empty( $faq['open'] ) ? 'true' : 'false'; ?>"
+						>
+							<span class="faq-section__question"><?php echo esc_html( $faq['question'] ); ?></span>
+							<span class="faq-section__icon" aria-hidden="true"></span>
+						</button>
+						<div class="faq-section__panel">
+							<p><?php echo esc_html( $faq['answer'] ); ?></p>
+						</div>
 					</div>
-				</div>
-				
-				<!-- FAQ 2 -->
-				<div class="faq-item">
-					<button class="faq-trigger">
-						What is the turnaround time for bookings?
-						<span class="faq-icon"></span>
-					</button>
-					<div class="faq-content">
-						<p>Priority subscribers receive same-day service. For standard repairs or on-site bookings, our technicians typically arrive or start troubleshooting within 4 to 24 hours of booking.</p>
-					</div>
-				</div>
-				
-				<!-- FAQ 3 -->
-				<div class="faq-item">
-					<button class="faq-trigger">
-						Can I cancel my subscription at any time?
-						<span class="faq-icon"></span>
-					</button>
-					<div class="faq-content">
-						<p>Absolutely. Our personal IT membership is billed on a month-to-month basis, meaning there are no lock-in contracts. You are free to cancel, pause, or adjust your membership plan at any time.</p>
-					</div>
-				</div>
-				
-				<!-- FAQ 4 -->
-				<div class="faq-item">
-					<button class="faq-trigger">
-						Are your technicians certified?
-						<span class="faq-icon"></span>
-					</button>
-					<div class="faq-content">
-						<p>Yes, all Platinum Tech Solutions professionals are certified IT experts who have passed comprehensive technical and background checks to guarantee secure, high-standard support.</p>
-					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- Recent News Section -->
-<section class="news-section">
+<!-- Recent News — Figma three-card grid -->
+<?php
+$platinum_news_uri = get_template_directory_uri() . '/images/';
+$platinum_news    = array(
+	array(
+		'title' => __( '5 Signs Your Computer May Have a Virus', 'platinum' ),
+		'image' => 'News-1.png',
+		'alt'   => __( 'Laptop showing a virus warning on screen', 'platinum' ),
+		'url'   => '#',
+	),
+	array(
+		'title' => __( 'How to Make Your Laptop Faster in Minutes', 'platinum' ),
+		'image' => 'News-2.png',
+		'alt'   => __( 'Hands typing on a laptop keyboard', 'platinum' ),
+		'url'   => '#',
+	),
+	array(
+		'title' => __( 'Why Your Wi-Fi Is Slow and How to Fix It', 'platinum' ),
+		'image' => 'News-3.png',
+		'alt'   => __( 'Woman using a laptop at home', 'platinum' ),
+		'url'   => '#',
+	),
+);
+?>
+<section id="news" class="news-section">
 	<div class="container">
-		<div class="news-top">
-			<h2 class="news-heading">Recent News</h2>
-			<a href="#" class="text-link">
-				View All Blogs
-				<?php platinum_svg( 'arrow-right' ); ?>
-			</a>
-		</div>
-		
-		<div class="grid-3">
-			<!-- Blog 1 -->
-			<article class="blog-card">
-				<div class="blog-img-wrapper">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/blog-1.jpg' ); ?>" alt="Cybersecurity laptop alert">
-					<span class="blog-badge">Security</span>
-				</div>
-				<div class="blog-content">
-					<div class="blog-meta">
-						<span><?php platinum_svg( 'calendar' ); ?> June 2, 2026</span>
-						<span><?php platinum_svg( 'user' ); ?> By Admin</span>
-					</div>
-					<h3 class="blog-title"><a href="#">5 Cybersecurity Habits You Should Adopt Today</a></h3>
-					<p class="blog-excerpt">Discover basic steps you can take to protect your private data and home devices from rising cyber threats...</p>
-					<a href="#" class="blog-read-more">Read More <?php platinum_svg( 'arrow-right' ); ?></a>
-				</div>
-			</article>
-			
-			<!-- Blog 2 -->
-			<article class="blog-card">
-				<div class="blog-img-wrapper">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/blog-2.jpg' ); ?>" alt="Laptop motherboard cleaning">
-					<span class="blog-badge">Hardware</span>
-				</div>
-				<div class="blog-content">
-					<div class="blog-meta">
-						<span><?php platinum_svg( 'calendar' ); ?> May 28, 2026</span>
-						<span><?php platinum_svg( 'user' ); ?> By Support</span>
-					</div>
-					<h3 class="blog-title"><a href="#">How Often Should You Clean Your Computer Hardware?</a></h3>
-					<p class="blog-excerpt">Dust and debris can cause thermal throttling and damage your system components. Here is our expert guide on maintenance...</p>
-					<a href="#" class="blog-read-more">Read More <?php platinum_svg( 'arrow-right' ); ?></a>
-				</div>
-			</article>
-			
-			<!-- Blog 3 -->
-			<article class="blog-card">
-				<div class="blog-img-wrapper">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/images/blog-3.jpg' ); ?>" alt="Working remotely in home office">
-					<span class="blog-badge">WFH Tips</span>
-				</div>
-				<div class="blog-content">
-					<div class="blog-meta">
-						<span><?php platinum_svg( 'calendar' ); ?> May 15, 2026</span>
-						<span><?php platinum_svg( 'user' ); ?> By Tech team</span>
-					</div>
-					<h3 class="blog-title"><a href="#">Maximizing Wi-Fi Speeds in a Remote Office</a></h3>
-					<p class="blog-excerpt">Experiencing drops or lags on virtual calls? Learn simple adjustments to optimize router positioning and bands...</p>
-					<a href="#" class="blog-read-more">Read More <?php platinum_svg( 'arrow-right' ); ?></a>
-				</div>
-			</article>
+		<header class="news-section__header">
+			<h2 class="news-section__watermark" aria-hidden="true"><?php esc_html_e( 'Recent News', 'platinum' ); ?></h2>
+		</header>
+
+		<div class="news-section__grid">
+			<?php foreach ( $platinum_news as $post ) : ?>
+				<article class="news-section__card">
+					<a href="<?php echo esc_url( $post['url'] ); ?>" class="news-section__media">
+						<img
+							src="<?php echo esc_url( $platinum_news_uri . $post['image'] ); ?>"
+							alt="<?php echo esc_attr( $post['alt'] ); ?>"
+							width="400"
+							height="300"
+							loading="lazy"
+							decoding="async"
+						>
+					</a>
+					<h3 class="news-section__title">
+						<a href="<?php echo esc_url( $post['url'] ); ?>"><?php echo esc_html( $post['title'] ); ?></a>
+					</h3>
+					<a href="<?php echo esc_url( $post['url'] ); ?>" class="news-section__link">
+						<img
+							src="<?php echo esc_url( $platinum_news_uri . 'read-more.svg' ); ?>"
+							alt=""
+							width="22"
+							height="22"
+							aria-hidden="true"
+						>
+						<span><?php esc_html_e( 'Read More', 'platinum' ); ?></span>
+					</a>
+				</article>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>

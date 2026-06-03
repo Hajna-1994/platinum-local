@@ -1,233 +1,229 @@
+// Our Services — Figma slider section
+
+$services-bg: #ffffff;
+$services-text: #111827;
+$services-muted: #e5e7eb;
+$services-body: #374151;
+
 .services-section {
-  background-color: $color-white;
   position: relative;
-  
-  .services-wrapper {
+  padding: 100px 0 100px;
+  background-color: $services-bg;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 56px 0 72px;
+  }
+
+  &__header {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 50px;
-    align-items: flex-start;
-    
-    @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 40px;
+
+    @media (max-width: $breakpoint-tablet) {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 24px;
     }
   }
-  
-  .services-info {
-    position: sticky;
-    top: 100px;
-    
-    @media (max-width: $breakpoint-desktop) {
-      position: static;
-    }
+
+  &__intro {
+    max-width: 420px;
   }
-  
-  .services-watermark {
-    font-family: $font-secondary;
-    font-size: 80px;
-    font-weight: 900;
+
+  &__desc {
+    margin: 0 0 20px;
+    font-family: $font-primary;
+    font-size: 1rem;
+    line-height: 24px;
+    color: $services-body;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: $font-primary;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba($color-dark-blue, 0.04);
-    line-height: 1;
-    margin-bottom: -10px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      font-size: 50px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: $services-text;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.65;
     }
   }
-  
-  .services-heading {
-    font-size: 40px;
-    font-weight: 800;
-    color: $color-dark-blue;
-    margin-bottom: 25px;
-    line-height: 1.15;
-    
-    @media (max-width: $breakpoint-tablet) {
-      font-size: 30px;
-    }
-  }
-  
-  .services-desc {
-    font-size: 15px;
-    line-height: 1.6;
-    color: $color-text-muted;
-    margin-bottom: 30px;
-  }
-  
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @media (max-width: $breakpoint-mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .service-card {
-    height: 300px;
-    border-radius: $border-radius-md;
-    overflow: hidden;
-    position: relative;
-    box-shadow: $shadow-md;
+
+  &__link-icon {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px;
-    color: $color-white;
-    transition: $transition-default;
-    cursor: pointer;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(10, 17, 40, 0.9) 0%, rgba(10, 17, 40, 0.3) 60%, transparent 100%);
-      z-index: 1;
-      transition: $transition-default;
+    flex-shrink: 0;
+    transform: rotate(-90deg);
+    color: $services-text;
+  }
+
+  &__watermark {
+    margin: 0;
+    justify-self: end;
+    // text-align: right;
+    font-family: $font-secondary;
+    font-size: clamp(3rem, 7vw, 6.25rem);
+    font-weight: bold;
+    line-height: 79px;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: $services-muted;
+    user-select: none;
+
+    @media (max-width: $breakpoint-tablet) {
+      justify-self: start;
+      text-align: left;
     }
-    
+  }
+
+  &__carousel {
+    position: relative;
+    margin-right: calc(-1 * #{$container-padding});
+
+    @media (min-width: $breakpoint-wide) {
+      margin-right: calc((100vw - #{$container-max-width}) / -2 - #{$container-padding});
+    }
+  }
+
+  .services-swiper {
+    overflow: visible;
+    padding-bottom: 48px;
+  }
+
+  .swiper-slide {
+    height: auto;
+  }
+
+  .services-swiper-pagination {
+    bottom: 0 !important;
+
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: #d1d5db;
+      opacity: 1;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: $color-primary;
+      transform: scale(1.15);
+    }
+  }
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  
+
+  &__image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: #e5e7eb;
+
     img {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0;
-      transition: transform 0.5s ease;
+      display: block;
+      transition: transform 0.45s ease;
     }
-    
-    .service-card-content {
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(
+      180deg,
+      rgba($color-primary, 0.35) 0%,
+      rgba($color-primary, 0.75) 55%,
+      rgba(29, 78, 216, 0.9) 100%
+    );
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 2;
+  }
+
+  &__explore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $color-white;
+    color: $color-primary;
+    flex-shrink: 0;
+    margin-bottom: auto;
+    margin-top: auto;
+    transition: transform 0.2s ease;
+
+    svg {
+      width: 14px;
+      height: 24px;
     }
-    
-    .service-card-icon {
-      width: 48px;
-      height: 48px;
-      background-color: rgba($color-white, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      border: 1px solid rgba($color-white, 0.2);
-      
-      svg {
-        width: 24px;
-        height: 24px;
-        color: $color-cyan;
-      }
-    }
-    
-    .service-card-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    
-    .service-card-link {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: $color-cyan;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.8;
-      
-      svg {
-        width: 12px;
-        height: 12px;
-        transition: transform 0.3s ease;
-      }
-    }
-    
-    // Hover Effects
+
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: $shadow-lg;
-      
-      &::before {
-        background: linear-gradient(to top, rgba($color-primary-dark, 0.95) 0%, rgba($color-primary-dark, 0.5) 70%, transparent 100%);
-      }
-      
-      img {
-        transform: scale(1.08);
-      }
-      
-      .service-card-link {
-        opacity: 1;
-        
-        svg {
-          transform: translateX(4px);
-        }
-      }
+      transform: scale(1.08);
     }
+  }
+
+  &__overlay-text {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 24px;
+    font-weight: 500;
+    color: #FFFFFF;
+    text-align: left;
+    max-width: 230px;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-primary;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 35px;
+    text-align: center;
+    color: $services-text;
+  }
+
+  &:hover,
+  &:focus-within {
     
-    // Featured / Pure color Card variant
-    &-featured {
-      background-color: $color-primary;
-      background-image: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    .service-card__overlay {
+      opacity: 1;
+      visibility: visible;
       
-      &::before {
-        display: none;
-      }
-      
-      .service-card-icon {
-        width: 72px;
-        height: 72px;
-        background-color: rgba($color-white, 0.15);
-        border: 2px solid rgba($color-white, 0.25);
-        margin-bottom: 20px;
-        margin-right: auto;
-        margin-left: auto;
-        
-        svg {
-          width: 32px;
-          height: 32px;
-          color: $color-white;
-        }
-      }
-      
-      .service-card-title {
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-      
-      .service-card-desc {
-        font-size: 13px;
-        color: rgba($color-white, 0.8);
-        line-height: 1.5;
-        margin-bottom: 20px;
-        padding: 0 10px;
-      }
-      
-      &:hover {
-        background-image: linear-gradient(135deg, $color-cyan 0%, $color-primary 100%);
-        
-        .service-card-icon {
-          background-color: $color-white;
-          svg {
-            color: $color-primary;
-          }
-        }
-      }
+    }
+   
+
+    .service-card__image img {
+      transform: scale(1.05);
     }
   }
 }

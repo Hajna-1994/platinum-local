@@ -26,163 +26,278 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // 2. FAQ Accordion Functionality
-  const faqItems = document.querySelectorAll('.faq-item');
+  // 2. FAQ accordion + load more
+  const faqItems = document.querySelectorAll('.faq-section__item');
+  const faqLoadMore = document.getElementById('faq-load-more');
+  const faqHiddenItems = document.querySelectorAll('.faq-section__item--hidden');
 
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    if (trigger) {
-      trigger.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        
-        // Close all active items
-        faqItems.forEach(otherItem => {
-          otherItem.classList.remove('active');
-        });
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector('.faq-section__trigger');
+    if (!trigger) return;
 
-        // Toggle current item
-        if (!isActive) {
-          item.classList.add('active');
+    trigger.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+
+      faqItems.forEach((otherItem) => {
+        otherItem.classList.remove('is-open');
+        const otherTrigger = otherItem.querySelector('.faq-section__trigger');
+        if (otherTrigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (!isOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  if (faqLoadMore && faqHiddenItems.length) {
+    faqLoadMore.addEventListener('click', () => {
+      faqHiddenItems.forEach((item) => {
+        item.classList.remove('faq-section__item--hidden');
+      });
+      faqLoadMore.setAttribute('aria-expanded', 'true');
+      faqLoadMore.hidden = true;
+    });
+  } else if (faqLoadMore) {
+    faqLoadMore.hidden = true;
+  }
+
+  // 3. Service Areas — state tabs, city columns, tab indicator
+  const areaTabs = document.querySelectorAll('.service-areas-section__tab');
+  const areasCitiesPanel = document.getElementById('areas-cities-panel');
+  const areaTabDot = document.querySelector('.service-areas-section__tab-dot');
+
+  const stateAreasData = {
+    nsw: [
+      ['Sydney', 'Central Coast', 'Mittagong', 'Orange', 'Taree', 'Coffs Harbour'],
+      ['Newcastle', 'Port Macquarie', 'Mittagong', 'Tweed Heads', 'Taree', 'Bathurst', 'Maitland'],
+      ['Nowra', 'Tamworth', 'Wollongong']
+    ],
+    vic: [
+      ['Melbourne', 'Geelong', 'Ballarat', 'Bendigo', 'Shepparton', 'Warrnambool'],
+      ['Frankston', 'Dandenong', 'Mornington', 'Traralgon', 'Wodonga', 'Mildura'],
+      ['Horsham', 'Sale', 'Echuca']
+    ],
+    qld: [
+      ['Brisbane', 'Gold Coast', 'Sunshine Coast', 'Cairns', 'Townsville', 'Toowoomba'],
+      ['Rockhampton', 'Mackay', 'Bundaberg', 'Gladstone', 'Hervey Bay', 'Maryborough'],
+      ['Ipswich', 'Logan', 'Redcliffe']
+    ],
+    sa: [
+      ['Adelaide', 'Mount Gambier', 'Whyalla', 'Murray Bridge', 'Port Augusta', 'Port Pirie'],
+      ['Gawler', 'Victor Harbor', 'Kadina', 'Naracoorte', 'Millicent', 'Renmark'],
+      ['Berri', 'Clare', 'Port Lincoln']
+    ],
+    wa: [
+      ['Perth', 'Fremantle', 'Mandurah', 'Bunbury', 'Geraldton', 'Kalgoorlie'],
+      ['Albany', 'Broome', 'Karratha', 'Port Hedland', 'Esperance', 'Busselton'],
+      ['Rockingham', 'Joondalup', 'Midland']
+    ],
+    tas: [
+      ['Hobart', 'Launceston', 'Devonport', 'Burnie', 'Kingston', 'Ulverstone'],
+      ['New Norfolk', 'George Town', 'Queenstown', 'Smithton', 'Sorell', 'Bridgewater'],
+      ['Richmond', 'Deloraine', 'St Helens']
+    ],
+    nt: [
+      ['Darwin', 'Alice Springs', 'Katherine', 'Palmerston', 'Nhulunbuy', 'Tennant Creek'],
+      ['Jabiru', 'Yulara', 'Humpty Doo', 'Howard Springs'],
+      ['Casuarina', 'Nightcliff', 'Larrakeyah']
+    ],
+    act: [
+      ['Canberra', 'Belconnen', 'Tuggeranong', 'Gungahlin', 'Woden', 'Fyshwick'],
+      ['Queanbeyan', 'Mitchell', 'Dickson', 'Civic'],
+      ['Braddon', 'Kingston', 'Manuka']
+    ]
+  };
+
+  function renderCityColumns(columns) {
+    if (!areasCitiesPanel || !columns) return;
+
+    areasCitiesPanel.innerHTML = '';
+    columns.forEach((cities, index) => {
+      const col = document.createElement('ul');
+      col.className = 'service-areas-section__column';
+
+      cities.forEach((city, cityIndex) => {
+        const li = document.createElement('li');
+        li.className = 'service-areas-section__city';
+        if (index === 0 && cityIndex === 0) {
+          li.classList.add('service-areas-section__city--featured');
+        }
+        li.textContent = city;
+        col.appendChild(li);
+      });
+
+      areasCitiesPanel.appendChild(col);
+    });
+  }
+
+  function moveAreaTabDot(activeTab) {
+    if (!areaTabDot || !activeTab) return;
+    const track = activeTab.closest('.service-areas-section__tabs-wrap');
+    if (!track) return;
+
+    const trackRect = track.querySelector('.service-areas-section__tab-track').getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+    const center = tabRect.left + tabRect.width / 2 - trackRect.left;
+    areaTabDot.style.left = `${center}px`;
+  }
+
+  function activateState(stateKey) {
+    const data = stateAreasData[stateKey];
+    if (!data) return;
+
+    renderCityColumns(data);
+
+    areaTabs.forEach((tab) => {
+      const isActive = tab.getAttribute('data-state') === stateKey;
+      tab.classList.toggle('is-active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (isActive) {
+        moveAreaTabDot(tab);
+      }
+    });
+  }
+
+  if (areaTabs.length && areasCitiesPanel) {
+    areaTabs.forEach((tab) => {
+      tab.addEventListener('click', function () {
+        activateState(this.getAttribute('data-state'));
+      });
+    });
+
+    const initialTab = document.querySelector('.service-areas-section__tab.is-active');
+    if (initialTab) {
+      moveAreaTabDot(initialTab);
+    }
+
+    window.addEventListener('resize', function () {
+      const activeTab = document.querySelector('.service-areas-section__tab.is-active');
+      if (activeTab) {
+        moveAreaTabDot(activeTab);
+      }
+    });
+  }
+
+  // 4. Services slider (Swiper)
+  const servicesSwiperEl = document.querySelector('.services-swiper');
+  if (servicesSwiperEl && typeof Swiper !== 'undefined') {
+    new Swiper('.services-swiper', {
+      slidesPerView: 1.15,
+      spaceBetween: 20,
+      grabCursor: true,
+      watchOverflow: true,
+      pagination: {
+        el: '.services-swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 1.4,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2.2,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 3.1,
+          spaceBetween: 28,
+        },
+        1280: {
+          slidesPerView: 3.35,
+          spaceBetween: 32,
+        },
+      },
+    });
+  }
+
+  // 5. Testimonials slider (Swiper)
+  const testimonialsSwiperEl = document.querySelector('.testimonials-swiper');
+  if (testimonialsSwiperEl && typeof Swiper !== 'undefined') {
+    new Swiper('.testimonials-swiper', {
+      slidesPerView: 1.1,
+      spaceBetween: 20,
+      grabCursor: true,
+      watchOverflow: true,
+      breakpoints: {
+        640: {
+          slidesPerView: 1.5,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2.1,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 2.6,
+          spaceBetween: 28,
+        },
+        1280: {
+          slidesPerView: 3.15,
+          spaceBetween: 32,
+        },
+      },
+    });
+  }
+
+  // 6. Homepage video banner — autoplay muted; play button removes poster + sound
+  const videoBannerInner = document.querySelector('.video-banner__inner');
+  const videoPoster = document.getElementById('video-banner-poster');
+  const videoPlayBtn = document.getElementById('video-banner-play');
+  const videoEl = document.getElementById('video-banner-video');
+
+  if (videoEl) {
+    videoEl.muted = true;
+    videoEl.defaultMuted = true;
+
+    function ensureVideoPlaying() {
+      const promise = videoEl.play();
+      if (promise && typeof promise.catch === 'function') {
+        promise.catch(function() {});
+      }
+    }
+
+    if (videoEl.readyState >= 2) {
+      ensureVideoPlaying();
+    } else {
+      videoEl.addEventListener('loadeddata', ensureVideoPlaying, { once: true });
+    }
+
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && videoPoster && !videoPoster.classList.contains('is-hidden')) {
+        ensureVideoPlaying();
+      }
+    });
+
+    function playBannerVideoWithSound() {
+      if (videoPoster) {
+        videoPoster.classList.add('is-hidden');
+        videoPoster.setAttribute('aria-hidden', 'true');
+      }
+      if (videoBannerInner) {
+        videoBannerInner.classList.add('is-playing');
+      }
+      videoEl.muted = false;
+      videoEl.loop = false;
+      videoEl.setAttribute('controls', '');
+      ensureVideoPlaying();
+    }
+
+    if (videoPlayBtn) {
+      videoPlayBtn.addEventListener('click', playBannerVideoWithSound);
+    }
+
+    if (videoPoster) {
+      videoPoster.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          playBannerVideoWithSound();
         }
       });
     }
-  });
-
-  // 3. Service Areas Tabs and SVG Map Interaction
-  const tabButtons = document.querySelectorAll('.area-tab-btn');
-  const mapStates = document.querySelectorAll('.map-state');
-  const mapMarkers = document.querySelectorAll('.map-marker');
-  
-  // Data for active suburbs by city
-  const cityData = {
-    sydney: {
-      name: "Sydney, NSW",
-      desc: "Providing lightning-fast IT support and expert tech repair services across the greater Sydney metropolitan area. From the CBD to the suburbs, our certified technicians are on hand same-day.",
-      suburbs: ["Sydney CBD", "North Sydney", "Parramatta", "Surry Hills", "Chatswood", "Manly", "Ryde", "Bondi Junction"]
-    },
-    melbourne: {
-      name: "Melbourne, VIC",
-      desc: "Expert on-site and remote IT assistance for Melbournians. We support small businesses and residential clients with reliable computer repair and platform setup solutions.",
-      suburbs: ["Melbourne CBD", "Richmond", "St Kilda", "Fitzroy", "Southbank", "Brunswick", "Hawthorn", "Footscray"]
-    },
-    brisbane: {
-      name: "Brisbane, QLD",
-      desc: "Your local tech solutions provider in Sunshine State. Certified technicians available for same-day hardware installations, software troubleshooting, and Wi-Fi optimization.",
-      suburbs: ["Brisbane CBD", "Fortitude Valley", "South Brisbane", "Indooroopilly", "Chermside", "Carindale", "Sunnybank", "Paddington"]
-    },
-    adelaide: {
-      name: "Adelaide, SA",
-      desc: "Fast and affordable tech repairs and network troubleshooting for Adelaide homes and businesses. Our team is dedicated to keeping your digital tools running smoothly.",
-      suburbs: ["Adelaide CBD", "North Adelaide", "Glenelg", "Norwood", "Prospect", "Unley", "Marion", "Mawson Lakes"]
-    },
-    perth: {
-      name: "Perth, WA",
-      desc: "Premium tech support and reliable computer repair services in Western Australia. We offer fast turnarounds and professional, remote troubleshooting help.",
-      suburbs: ["Perth CBD", "Fremantle", "Subiaco", "Joondalup", "Victoria Park", "Scarborough", "Midland", "Armadale"]
-    },
-    hobart: {
-      name: "Hobart, TAS",
-      desc: "Quality remote and localized IT support for Tasmanian businesses and households. Experience stress-free computer setups and secure backup systems today.",
-      suburbs: ["Hobart CBD", "Sandy Bay", "Glenorchy", "Bellerive", "Kingston", "Moonah", "New Town", "North Hobart"]
-    },
-    darwin: {
-      name: "Darwin, NT",
-      desc: "Reliable IT assistance for Darwin and surrounding territories. Dedicated certified technical experts offering immediate remote solutions to get you running fast.",
-      suburbs: ["Darwin CBD", "Casuarina", "Palmerston", "Nightcliff", "Larrakeyah", "Parap", "Fannie Bay", "Winnellie"]
-    }
-  };
-
-  function activateCity(cityKey) {
-    const data = cityData[cityKey];
-    if (!data) return;
-
-    // Update details panel
-    const cityNameEl = document.getElementById('active-city-name');
-    const cityDescEl = document.getElementById('active-city-desc');
-    const suburbsGridEl = document.getElementById('active-suburbs-grid');
-
-    if (cityNameEl) cityNameEl.textContent = data.name;
-    if (cityDescEl) cityDescEl.textContent = data.desc;
-    
-    if (suburbsGridEl) {
-      suburbsGridEl.innerHTML = '';
-      data.suburbs.forEach(suburb => {
-        const item = document.createElement('div');
-        item.className = 'suburb-item';
-        item.textContent = suburb;
-        suburbsGridEl.appendChild(item);
-      });
-    }
-
-    // Update active tab buttons
-    tabButtons.forEach(btn => {
-      if (btn.getAttribute('data-city') === cityKey) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    // Update active map state outline
-    const targetStateId = getCityStateId(cityKey);
-    mapStates.forEach(state => {
-      if (state.id === targetStateId) {
-        state.classList.add('active');
-      } else {
-        state.classList.remove('active');
-      }
-    });
-
-    // Update active map marker
-    mapMarkers.forEach(marker => {
-      if (marker.getAttribute('data-city') === cityKey) {
-        marker.classList.add('active');
-      } else {
-        marker.classList.remove('active');
-      }
-    });
   }
-
-  function getCityStateId(cityKey) {
-    switch (cityKey) {
-      case 'sydney': return 'state-nsw';
-      case 'melbourne': return 'state-vic';
-      case 'brisbane': return 'state-qld';
-      case 'adelaide': return 'state-sa';
-      case 'perth': return 'state-wa';
-      case 'hobart': return 'state-tas';
-      case 'darwin': return 'state-nt';
-      default: return '';
-    }
-  }
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const cityKey = this.getAttribute('data-city');
-      activateCity(cityKey);
-    });
-  });
-
-  mapMarkers.forEach(marker => {
-    marker.addEventListener('click', function() {
-      const cityKey = this.getAttribute('data-city');
-      activateCity(cityKey);
-    });
-  });
-
-  mapStates.forEach(state => {
-    state.addEventListener('click', function() {
-      // Find city associated with this state
-      let cityKey = '';
-      if (this.id === 'state-nsw') cityKey = 'sydney';
-      else if (this.id === 'state-vic') cityKey = 'melbourne';
-      else if (this.id === 'state-qld') cityKey = 'brisbane';
-      else if (this.id === 'state-sa') cityKey = 'adelaide';
-      else if (this.id === 'state-wa') cityKey = 'perth';
-      else if (this.id === 'state-tas') cityKey = 'hobart';
-      else if (this.id === 'state-nt') cityKey = 'darwin';
-      
-      if (cityKey) activateCity(cityKey);
-    });
-  });
 });

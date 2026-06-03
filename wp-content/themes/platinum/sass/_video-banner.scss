@@ -1,0 +1,99 @@
+// Full-width video section below hero
+
+.video-banner {
+  padding: 0;
+  width: 100%;
+  background-color: $color-dark-deep;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    aspect-ratio: 21 / 9;
+    min-height: 280px;
+    max-height: 520px;
+
+    @media (max-width: $breakpoint-tablet) {
+      aspect-ratio: 16 / 9;
+      min-height: 220px;
+      max-height: none;
+    }
+  }
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    display: block;
+    background: $color-black;
+    z-index: 0;
+  }
+
+  &__poster {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+
+    &.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  &__thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    display: block;
+  }
+
+  &__play {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+
+    &:hover {
+      transform: scale(1.06);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-cyan;
+      outline-offset: 4px;
+    }
+  }
+
+  &__play-icon {
+    display: flex;
+    margin-left: 4px;
+  }
+
+  // After user clicks play — show native controls
+  &__inner.is-playing .video-banner__video {
+    z-index: 1;
+  }
+}

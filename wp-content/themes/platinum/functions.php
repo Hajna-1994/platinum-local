@@ -69,11 +69,31 @@ function platinum_scripts() {
 	// Google Fonts: Inter and Outfit.
 	wp_enqueue_style( 'platinum-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap', array(), null );
 
-	// Enqueue Compiled Stylesheet.
-	wp_enqueue_style( 'platinum-style', get_template_directory_uri() . '/css/main.css', array( 'platinum-fonts' ), '1.2.0' );
+	wp_enqueue_style(
+		'swiper',
+		'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
+		array(),
+		'11'
+	);
 
-	// Enqueue Custom JS.
-	wp_enqueue_script( 'platinum-script', get_template_directory_uri() . '/js/main.js', array(), '1.1.0', true );
+	// Enqueue Compiled Stylesheet.
+	wp_enqueue_style( 'platinum-style', get_template_directory_uri() . '/css/main.css', array( 'platinum-fonts', 'swiper' ), '1.3.0' );
+
+	wp_enqueue_script(
+		'swiper',
+		'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
+		array(),
+		'11',
+		true
+	);
+
+	wp_enqueue_script(
+		'platinum-script',
+		get_template_directory_uri() . '/js/main.js',
+		array( 'swiper' ),
+		'1.3.0',
+		true
+	);
 }
 add_action( 'wp_enqueue_scripts', 'platinum_scripts' );
 

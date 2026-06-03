@@ -1,239 +1,245 @@
-// Footer CTA Section (Get Your Tech Issues Fixed Today)
-.footer-cta-section {
-  background-color: $color-dark-deep;
-  color: $color-text-white;
-  padding: 80px 0;
-  text-align: center;
+// Footer CTA + site footer — Figma dark layout
+
+$footer-bg: #050918;
+$footer-surface: #0a1128;
+$footer-text: rgba(255, 255, 255, 0.6);
+$footer-heading: #ffffff;
+$footer-border: rgba(255, 255, 255, 0.08);
+$footer-social-bg: rgba(255, 255, 255, 0.06);
+$footer-social-icon: #00d8ff;
+.footer-outer{
+  background: linear-gradient(22deg, #080814 55%, #000c2d 87%);
+.footer-cta {
   position: relative;
+  padding: clamp(64px, 8vw, 100px) 0 0px;
+  text-align: center;
+  color: $color-white;
+  // background-color: $footer-bg;
+  // background-image:
+  //   radial-gradient(ellipse at 50% 0%, rgba($color-primary, 0.2) 0%, transparent 55%),
+  //   radial-gradient(ellipse at 80% 100%, rgba($color-cyan, 0.08) 0%, transparent 45%);
   overflow: hidden;
-  border-bottom: 1px solid rgba($color-white, 0.05);
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba($color-primary, 0.12) 0%, transparent 60%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  
-  .container {
+  // border-bottom: 1px solid $footer-border;
+
+  &__inner {
     position: relative;
-    z-index: 2;
-    max-width: 800px;
+    z-index: 1;
+    //max-width: 900px;
+    // margin: 0 auto;
   }
-  
-  .cta-heading {
-    font-size: 48px;
+
+  &__title {
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    font-family: $font-primary;
+    font-size: clamp(1.75rem, 4.5vw, 6.25rem);
     font-weight: 800;
+    line-height: 79px;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 30px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      font-size: 32px;
-    }
-    
-    span.highlight {
-      color: $color-cyan;
-      display: block;
-      
-      @media (min-width: $breakpoint-tablet) {
-        display: inline;
-      }
-    }
+    color: $color-white;
+    text-align: left;
+    max-width: 1080px;
   }
-  
-  .cta-buttons {
+
+  &__title-accent {
+    display: inline;
+    margin: 0 0.2em;
+    background: linear-gradient(90deg, #1E5BFF 100%, #75D9FF 89%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+  }
+
+  &__actions {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: 16px;
+
     @media (max-width: $breakpoint-mobile) {
       flex-direction: column;
-      align-items: center;
-      
+      width: 100%;
+
       .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: 320px;
       }
     }
   }
 }
 
-// Site Footer Styling
 .site-footer {
-  background-color: $color-dark-blue;
-  color: rgba($color-white, 0.65);
-  padding: 80px 0 30px;
-  font-size: 14px;
+  padding: clamp(48px, 6vw, 72px) 0 clamp(32px, 4vw, 48px);
+  color: $footer-text;
+  font-size: 0.875rem;
   line-height: 1.6;
-  border-top: 1px solid rgba($color-white, 0.05);
-  
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    margin-bottom: 60px;
-    
-    @media (max-width: $breakpoint-desktop) {
-      grid-template-columns: repeat(2, 1fr);
+  // background-color: $footer-surface;
+  // background-image: radial-gradient(ellipse at 10% 0%, rgba($color-primary, 0.1) 0%, transparent 50%);
+
+  &__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: clamp(40px, 5vw, 56px);
+    padding-bottom: clamp(40px, 5vw, 56px);
+    // border-bottom: 1px solid $footer-border;
+  }
+
+  &__intro {
+    margin: 30px 0 0 0;
+    max-width: 380px;
+    font-size: 1rem;
+    line-height: 24px;
+    color: $footer-text;
+  }
+
+  &__logo {
+    display: block;
+    flex-shrink: 0;
+
+    img {
+      width: auto;
+      max-width: min(220px, 42vw);
+      height: auto;
     }
-    
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 40px);
+    margin-bottom: clamp(40px, 5vw, 56px);
+
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     @media (max-width: $breakpoint-tablet) {
       grid-template-columns: 1fr;
-      gap: 30px;
     }
   }
-  
-  .footer-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+
+  &__col {
+    min-width: 0;
   }
-  
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    
-    img {
-      height: 40px;
-      width: auto;
-    }
-  }
-  
-  .footer-about-text {
-    font-size: 14px;
-    color: rgba($color-white, 0.5);
-  }
-  
-  .footer-title {
+
+  &__heading {
+    margin: 0 0 18px;
     font-family: $font-secondary;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
-    color: $color-white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    padding-bottom: 10px;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 30px;
-      height: 2px;
-      background-color: $color-cyan;
-    }
+    color: $footer-heading;
+    letter-spacing: 0.01em;
   }
-  
-  .footer-links {
+
+  &__links {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    
-    a {
-      color: rgba($color-white, 0.6);
-      transition: $transition-default;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
       display: inline-flex;
       align-items: center;
-      
+
+      &:not(:last-child)::after {
+        content: '/';
+        margin: 0 10px;
+        color: rgba(255, 255, 255, 0.25);
+        font-weight: 400;
+        pointer-events: none;
+      }
+    }
+
+    a {
+      color: $footer-text;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      transition: color 0.25s ease;
+
       &:hover {
-        color: $color-cyan;
-        transform: translateX(4px);
+        color: $footer-social-icon;
       }
     }
   }
-  
-  .footer-contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      color: rgba($color-white, 0.6);
-      
-      svg {
-        width: 18px;
-        height: 18px;
-        color: $color-cyan;
-        flex-shrink: 0;
-        margin-top: 2px;
+
+  &__text {
+    p {
+      margin: 0 0 8px;
+
+      &:last-child {
+        margin-bottom: 0;
       }
-      
-      a:hover {
-        color: $color-cyan;
+    }
+
+    a {
+      color: $footer-text;
+      transition: color 0.25s ease;
+
+      &:hover {
+        color: $footer-social-icon;
       }
     }
   }
-  
-  .footer-socials {
+
+  &__socials {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
-    margin-top: 15px;
-    
-    .social-link {
-      width: 36px;
-      height: 36px;
-      background-color: rgba($color-white, 0.03);
-      border: 1px solid rgba($color-white, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $color-white;
-      transition: $transition-default;
-      
-      svg {
-        width: 16px;
-        height: 16px;
-      }
-      
-      &:hover {
-        background-color: $color-primary;
-        border-color: $color-primary;
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba($color-primary, 0.3);
-      }
-    }
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-  
-  // Footer Bottom Copyright
-  .footer-bottom {
-    border-top: 1px solid rgba($color-white, 0.05);
-    padding-top: 30px;
+
+  &__social-link {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    color: rgba($color-white, 0.4);
-    font-size: 13px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      flex-direction: column;
-      gap: 15px;
-      text-align: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: $footer-social-bg;
+    color: $footer-social-icon;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
     }
-    
-    .bottom-links {
-      display: flex;
-      gap: 20px;
-      
-      a {
-        color: rgba($color-white, 0.4);
-        
-        &:hover {
-          color: $color-cyan;
-        }
-      }
+
+    &:hover {
+      background-color: rgba($color-primary, 0.25);
+      transform: translateY(-2px);
+      color: $color-white;
     }
   }
+
+  &__copyright {
+    margin: 0;
+    padding-top: clamp(24px, 3vw, 32px);
+    border-top: 1px solid $footer-border;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// WordPress menu output in quick links column
+.site-footer .site-footer__links .menu-item {
+  display: inline-flex;
+  align-items: center;
+
+  &:not(:last-child)::after {
+    content: '/';
+    margin: 0 10px;
+    color: rgba(255, 255, 255, 0.25);
+  }
+}
 }
